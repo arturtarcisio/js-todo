@@ -5,7 +5,7 @@ var buttonElement = document.querySelector('#app button')
 var todos = [
     'Fazer café da manhã',
     'Estudar Javascript',
-    'Acessar comunidade Rocketseat'
+    'Estudar react'
 ]
 
 function renderTodos(){
@@ -15,7 +15,19 @@ function renderTodos(){
         var todoElement = document.createElement('li')
         var todoText = document.createTextNode(todo)
 
+        var linkElement = document.createElement('a')
+        linkElement.setAttribute('href', '#')
+        var textLink = document.createTextNode('Excluir')
+
+        var pos = todos.indexOf(todo)
+        linkElement.setAttribute('onclick', 'deleteTodo(' + pos + ')')
+
+
+        linkElement.appendChild(textLink)
+
         todoElement.appendChild(todoText)
+        todoElement.appendChild(linkElement)
+
         listElement.appendChild(todoElement)
     }
 }
@@ -31,3 +43,8 @@ function addTodo(){
 }
 
 buttonElement.onclick = addTodo
+
+function deleteTodo(pos){
+    todos.splice(pos, 1)
+    renderTodos()
+}
